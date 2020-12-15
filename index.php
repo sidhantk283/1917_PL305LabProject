@@ -1,10 +1,3 @@
-<?php 
-session_start();
-include("connection.php");
-include("functions.php");
-$user_data=check_login($con);
- ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,23 +9,33 @@ $user_data=check_login($con);
 	<div class="tittle">
 		PIXEL.com
 	</div>
+	<?php 
+	session_start();
+	include("connection.php");
+	include("functions.php");
+	$user_data=check_login($con);
+	$username=$_SESSION["Email"];
+	?>
 	<nav role="navigation">
 		<ul>
 			<li class="active"><a href="index.php">Home</a></li>
 			<li><a href="#">Explore</a>
-			<li><a href="#">Catagory</a>
-				<ul class="dropdown">
-					<li><a href="#">Photography</a></li>
-					<li><a href="#">Illastrations</a></li>
-					<li><a href="#">Clip-Art</a></li>
-					<li><a href="#">Other</a></li>
-				</ul>
-			</li>
-			<li><a href="#">About Us</a></li>
-			<li><a href="signup.php" class="Login">Login/Create Account</a></li>
-		</ul>
-	</nav>
-</header>
-<body>
-</body>
-</html>
+				<li><a href="#">Catagory</a>
+					<ul class="dropdown">
+						<li><a href="#">Photography</a></li>
+						<li><a href="#">Illastrations</a></li>
+						<li><a href="#">Clip-Art</a></li>
+						<li><a href="#">Other</a></li>
+					</ul>
+				</li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="signup.php" class="Login"><?php
+				echo "Sign In/Sign Up".$username;
+				?></a></li>
+			</ul>
+		</nav>
+	</header>
+	<body>
+	</body>
+	<?php session_destroy(); ?>
+	</html>
