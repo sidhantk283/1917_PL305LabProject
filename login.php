@@ -69,7 +69,7 @@
 					$email = $_POST['email'];
 					$password = $_POST['password'];
 					if (!empty($email) && !empty($password) && !is_numeric($email)) {
-						$query="SELECT * FROM `user` where Email = $email limit 1";
+						$query="SELECT * FROM `user` where Email = '$email' limit 1";
 						$result = $con->query($sql);
 
 						if($result->num_rows > 0){

@@ -1,3 +1,55 @@
+<?php 
+	//session_start();
+	include("connection.php");
+	include("functions.php");
+/*
+	if ($con) {
+	# code...
+		echo "done";
+		$sql = "SELECT `userid`, `userfirstname`, `userlastname`, `balance`, `password`, `Email` FROM `user` WHERE 1";
+		$result = $con->query($sql);
+
+		if ($result->num_rows > 0) {
+  			// output data of each row
+			while($row = $result->fetch_assoc()) {
+				echo "id ".$row["userid"]."Name ".$row["userfirstname"]." ".$row["userlastname"]." ".$row["password"]."<br>";
+			}
+		} else echo "0 results";
+	}else echo "not done";
+
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+		$fname = $_POST['fname'];
+		$lname = $_POST['lname'];
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+		if (!empty($fname) && !empty($lname) && !empty($email) && !empty($password) && !is_numeric($email)) {
+			$userid=random_num(20);
+			$_SESSION["userid"]=$userid;
+			$query="INSERT INTO `user`(`userfirstname`, `userlastname`, `balance`, `password`, `Email`) VALUES ($fname,$lname,0,$password,$email)";
+			$result = $con->query($query);
+			if($result){
+				//echo"<script>alert('Signup Successfull');location.href='login.php.php';</script>";
+				header("Location: login.php");
+				die;
+			}else "query wrong";
+			}else echo"<script>alert('Signup failed');location.href='';</script>";
+		}else echo "no post";*/
+		if(isset($_POST['submit']))
+		{
+			$fname=$_POST['fname'];
+			$lname=$_POST['lname'];
+			$email=$_POST['email'];
+			$password=md5($_POST['password']);
+			$query=$con->query("INSERT INTO `users`(`firstname`, `lastname`, `email`, `password`) VALUES ('$fname','$lname','$email','$password')");
+			if($query)
+			{
+				echo "<script>alert('Successfully Registered. You can login now');</script>";
+				//header('location:user-login.php');
+			}
+		}
+		session_destroy();
+		?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,45 +101,6 @@
 				<input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
 				<hr>
 
-				<?php 
-				session_start();
-				include("connection.php");
-				include("functions.php");
-
-				if ($con) {
-					# code...
-					echo "done";
-					$sql = "SELECT `userid`, `userfirstname`, `userlastname`, `balance`, `password`, `Email` FROM `user` WHERE 1";
-					$result = $con->query($sql);
-
-					if ($result->num_rows > 0) {
-  						// output data of each row
-						while($row = $result->fetch_assoc()) {
-							echo "id ".$row["userid"]."Name ".$row["userfirstname"]." ".$row["userlastname"]." ".$row["password"]."<br>";
-						}
-					} else {
-						echo "0 results";
-					}
-				}else echo "not done";
-
-				if($_SERVER['REQUEST_METHOD'] == "POST"){
-					$fname = $_POST['fname'];
-					$lname = $_POST['lname'];
-					$email = $_POST['email'];
-					$password = $_POST['password'];
-					if (!empty($fname) && !empty($lname) && !empty($email) && !empty($password) && !is_numeric($email)) {
-						$userid=random_num(20);
-						$_SESSION["userid"]=$userid;
-						$query="INSERT INTO `user`(`userid`,`userfirstname`, `userlastname`, `balance`, `password`, `Email`) VALUES ($userid,$fname,$lname,0,$password,$email)";
-						$result = $con->query($sql);
-						if($result){
-							header("Location: login.php");
-							die;
-						}
-					}else echo "Please enter some valid information	!";
-				}else echo "no post";
-				?>
-
 				<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 				<button type="submit" class="registerbtn">Register</button>
 			</div>
@@ -97,5 +110,5 @@
 			</div>
 		</form> 
 	</body>
-	<?php session_destroy(); ?>
 	</html>
+	
