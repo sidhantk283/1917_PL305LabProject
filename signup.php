@@ -1,54 +1,23 @@
 <?php 
-	//session_start();
-	include("connection.php");
-	include("functions.php");
-/*
-	if ($con) {
-	# code...
-		echo "done";
-		$sql = "SELECT `userid`, `userfirstname`, `userlastname`, `balance`, `password`, `Email` FROM `user` WHERE 1";
-		$result = $con->query($sql);
-
-		if ($result->num_rows > 0) {
-  			// output data of each row
-			while($row = $result->fetch_assoc()) {
-				echo "id ".$row["userid"]."Name ".$row["userfirstname"]." ".$row["userlastname"]." ".$row["password"]."<br>";
+session_start();
+include("connection.php");
+if(isset($_POST['submit'])){
+	$fname=$_POST['fname'];
+	$lname=$_POST['lname'];
+	$email=$_POST['email'];
+	$password=$_POST['password'];
+	$confpassword=$_POST['confpassword'];
+	
+	if (!empty($fname) && !empty($lname) && !empty($email) && !empty($password) && !empty($confpassword) && !is_numeric($email)) {
+		if($password==$confpassword){
+			$query=$con->query("INSERT INTO `user`(`userfirstname`, `userlastName`, `email`, `password`) VALUES ('$fname','$lname','$email','$password')");
+			if($query){
+				echo "<script>alert('Successfully Registered. You can login now');location.href='login.php';</script>";
 			}
-		} else echo "0 results";
-	}else echo "not done";
-
-if($_SERVER['REQUEST_METHOD'] == "POST"){
-		$fname = $_POST['fname'];
-		$lname = $_POST['lname'];
-		$email = $_POST['email'];
-		$password = $_POST['password'];
-		if (!empty($fname) && !empty($lname) && !empty($email) && !empty($password) && !is_numeric($email)) {
-			$userid=random_num(20);
-			$_SESSION["userid"]=$userid;
-			$query="INSERT INTO `user`(`userfirstname`, `userlastname`, `balance`, `password`, `Email`) VALUES ($fname,$lname,0,$password,$email)";
-			$result = $con->query($query);
-			if($result){
-				//echo"<script>alert('Signup Successfull');location.href='login.php.php';</script>";
-				header("Location: login.php");
-				die;
-			}else "query wrong";
-			}else echo"<script>alert('Signup failed');location.href='';</script>";
-		}else echo "no post";*/
-		if(isset($_POST['submit']))
-		{
-			$fname=$_POST['fname'];
-			$lname=$_POST['lname'];
-			$email=$_POST['email'];
-			$password=md5($_POST['password']);
-			$query=$con->query("INSERT INTO `users`(`firstname`, `lastname`, `email`, `password`) VALUES ('$fname','$lname','$email','$password')");
-			if($query)
-			{
-				echo "<script>alert('Successfully Registered. You can login now');</script>";
-				//header('location:user-login.php');
-			}
-		}
-		session_destroy();
-		?>
+		}else echo "<script>alert('Password was diffrent. Retry!');</script>";
+	}
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -64,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	<nav role="navigation">
 		<ul>
 			<li><a href="index.php">Home</a></li>
-			<li><a href="#">Explore</a>
+			<li><a href="#">Explore</a></li>
 				<li><a href="#">Catagory</a>
 					<ul class="dropdown">
 						<li><a href="#">Photography</a></li>
@@ -74,12 +43,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 					</ul>
 				</li>
 				<li><a href="#">About Us</a></li>
-				<li><a href="signup.php" class="login_button">Login/Create Account</a></li>
+				<li class="active">Login/Create Account</li>
 			</ul>
 		</nav>
 	</header>
 	<body>
-		<form method="post" action="">
+		<form method="post">
 			<div class="container">
 				<h1>Register</h1>
 				<p>Please fill in this form to create an account.</p>
@@ -98,11 +67,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 				<input type="password" placeholder="Enter Password" name="password" id="password" required>
 
 				<label for="psw-repeat"><b>Repeat Password</b></label>
-				<input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+				<input type="password" placeholder="Repeat Password" name="confpassword" id="confpassword" required>
 				<hr>
 
 				<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-				<button type="submit" class="registerbtn">Register</button>
+				<button type="submit" name="submit" class="registerbtn">Register</button>
 			</div>
 
 			<div class="container signin">
@@ -111,4 +80,3 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		</form> 
 	</body>
 	</html>
-	

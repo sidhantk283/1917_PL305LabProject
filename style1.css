@@ -35,14 +35,13 @@ li {
   color: #fff;
   display: block;
   float: left;
-  padding: 1rem;
+  padding:1rem;
   position: relative;
   text-decoration: none;
   transition-duration: 0.5s;
 }
 
-li a .Login{
-
+li .last{
 }
   
 li a {
@@ -54,7 +53,7 @@ li a {
 }
 
 
-li:hover {
+.active,li:hover {
   background: #990033;
   cursor: pointer;
 }
@@ -87,20 +86,44 @@ ul li ul li {
 /*Login page*/
 /* Add padding to containers */
 .container {
-  padding: 16px;
+    width: 40%;
+    margin: 30px auto;
+    padding: 16px;
+    background-color: #ffe6e6;
+}
+
+select{
+    width: 100%;
+    padding: 15px;
+    height: 10vh;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
 }
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email]{
   width: 100%;
   padding: 15px;
+  height: 7vh;
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=file]{
+    width: 100%;
+    padding: 10px;
+    height: 7vh;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=file]:focus, input[type=email]:focus{
   background-color: #ddd;
   outline: none;
 }
@@ -108,7 +131,7 @@ input[type=text]:focus, input[type=password]:focus {
 /* Overwrite default styles of hr */
 hr {
   border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 /* Set a style for the submit/register button */
@@ -123,7 +146,19 @@ hr {
   opacity: 0.9;
 }
 
-.registerbtn:hover {
+.resetbtn {
+  background-color: #ff3399;
+  color: white;
+  padding: 10px 10px;
+  margin: 8px 0;
+  margin-left: 25%;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover, .resetbtn:hover {
   opacity:1;
   background: #990033;
 }

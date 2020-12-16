@@ -5,8 +5,6 @@ if(isset($_SESSION['userid'])){
 	$id = $_SESSION['userid'];
 	$sql = "SELECT * FROM `user` WHERE `userid` = '$id' limit 1";
 	$result = $con->query($sql);
-	//$count=;
-	//$count=mysqli_num_rows($result);
 	if($result){
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
@@ -30,8 +28,8 @@ if(isset($_SESSION['userid'])){
 	</div>
 	<nav role="navigation">
 		<ul>
-			<li class="active">Home</li>
-			<li><a href="explore.php">Explore</a></li>
+			<li><a href="index.php">Home</li>
+			<li class="active">Explore</li>
 				<li><a href="#">Catagory</a>
 					<ul class="dropdown">
 						<li><a href="#">Photography</a></li>
@@ -41,7 +39,7 @@ if(isset($_SESSION['userid'])){
 					</ul>
 				</li>
 				<li><a href="#">About Us</a></li>
-				<li class="last">
+				<li>
 					<?php
 					if(!isset($_SESSION['userid'])) echo "<a href='signup.php' class='Login'>Sign In/Sign Up</a>";
 					else {
@@ -54,10 +52,10 @@ if(isset($_SESSION['userid'])){
 						</ul>";
 					}
 					?>
-				</li>
-			</ul>
-		</nav>
-	</header>
-	<body>
-	</body>
-	</html>
+			</li>
+		</ul>
+	</nav>
+</header>
+<body>
+</body>
+</html>
