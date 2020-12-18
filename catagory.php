@@ -14,20 +14,42 @@ if(isset($_SESSION['userid'])){
 			}
 		}
 	}
-}else unset($_SESSION['userid']);
+	
+	if(isset($_POST['catagory_select'])){
+		$ctitle = $_POST['catagory'];
+		$cat_data = $con->query("SELECT * FROM `catagory` WHERE `ctitle` = '$ctitle' limit 1");
+		if($cat_data){
+			if ($cat_data->num_rows > 0) {
+				while($cat_row = $cat_data->fetch_assoc()) {
+					$cid=$cat_row["cid"];
+				}
+			}
+		}else echo "<script>alert('Catagory Not Available')</script>";
 
-if(isset($_POST['catagory_create'])){
-	$ctitle = $_POST['ctitle'];
-	$cdesc = $_POST['cdesc'];
-	$userid = $_SESSION['userid'];
-	if(!empty(ctitle)){
-		$result_catagory_insert = $con->query("INSERT INTO `catagory`(`ctitle`, `cdesc`, `userid`) VALUES ('$ctitle','$cdesc','$userid')");
-		if ($result_catagory_insert) echo "<script>alert('Catagory Inserted')</script>";
-		else echo "<script>alert('Catagory Not Inserted')</script>";
+		if(!empty($ctitle)){
+			if(isset($_SESSION['im_id'])){
+				$im_id = $_SESSION['im_id'];
+				$result_catagory_select = $con->query("UPDATE `image` SET `cid`=$cid WHERE `im_id`= $im_id");
+				if ($result_catagory_select){
+					unset($_SESSION['im_id']);
+					echo "<script>alert('Catagory Applied');location.href='index.php';</script>";
+				}else echo "<script>alert('Catagory Not Applied')</script>";
+			}
+		}
+
+		if(isset($_POST['catagory_create'])){
+			$cctitle = $_POST['cctitle'];
+			$ccdesc = $_POST['ccdesc'];
+			if(!empty($cctitle)){
+				$result_catagory_insert = $con->query("INSERT INTO `catagory`(`ctitle`, `cdesc`, `userid`) VALUES ('$cctitle','$ccdesc','$id')");
+				if ($result_catagory_insert) echo "<script>alert('Catagory Inserted')</script>";
+				else echo "<script>alert('Catagory Not Inserted')</script>";
+			}
+		}
 	}
-}
-
+}else unset($_SESSION['userid']);
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,7 +115,7 @@ if(isset($_POST['catagory_create'])){
 					}
 					?>
 				</select>
-				<button type="submit" class="registerbtn" name="submit">Submit</button>
+				<button type="submit" class="registerbtn" name="catagory_select">Submit</button>
 			</form>
 			<br>
 			<hr>
@@ -102,10 +124,10 @@ if(isset($_POST['catagory_create'])){
 				<br>
 				<br>
 				<label for="fname">Catagory Title</label>
-				<input type="text" placeholder="Enter Catagory Title" name="ctitle" id="ctitle" required>
+				<input type="text" placeholder="Enter Catagory Title" name="cctitle" id="ctitle" required>
 
 				<label for="lname">Catagory Description</label>
-				<input type="text" placeholder="Enter Catagory Description" name="cdesc" id="cdesc">
+				<input type="text" placeholder="Enter Catagory Description" name="ccdesc" id="cdesc">
 				<button type="submit" name="catagory_create" class="registerbtn">Add Catagory</button>
 			</form>
 		</div>

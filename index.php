@@ -34,7 +34,7 @@ if(isset($_SESSION['userid'])){
 			<li><a href="explore.php">Explore</a></li>
 				<li><a href="#">Catagory</a>
 					<ul class="dropdown">
-						<li><a href="#">Photography</a></li>
+						<li><a href="photography.php">Photography</a></li>
 						<li><a href="#">Illastrations</a></li>
 						<li><a href="#">Clip-Art</a></li>
 						<li><a href="#">Other</a></li>
