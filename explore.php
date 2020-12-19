@@ -21,6 +21,44 @@ if(isset($_SESSION['userid'])){
 	<title>Pixel</title>
 	<link rel="stylesheet" type="text/css" href="style1.css">
 	<script src="js.js"></script>
+	<style>
+		div.main{
+			width: 80%;
+			margin: 30px auto;
+			background-color: #ffe6e6;
+		}
+
+		div.gallery {
+			margin: 5px;
+			border: 1px solid #ccc;
+			float: left;
+			width: 49%;
+			padding: 1px;
+			background-color: red;
+		}
+
+		div.gallery:hover {
+			border: 1px solid #777;
+		}
+
+		div.gallery img {
+			width: 100%;
+			height: auto;
+		}
+
+		div.desc {
+			padding-top: 5px;
+			padding-bottom: 10px;
+			text-align: center;
+		}
+
+		div.title {
+			padding-top: 10px;
+			text-align: center;
+			color: dodgerblue;
+		}
+
+	</style>
 </head>
 <header>
 	<div class="tittle">
@@ -57,7 +95,7 @@ if(isset($_SESSION['userid'])){
 	</nav>
 </header>
 <body>
-	
-
+<?php include('photography.php'); ?>
+<?php include('photography.php'); ?>
 </body>
 </html>
