@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 include("connection.php");
 if(isset($_SESSION['userid'])){
@@ -22,6 +22,7 @@ if(isset($_SESSION['userid'])){
 			if ($cat_data->num_rows > 0) {
 				while($cat_row = $cat_data->fetch_assoc()) {
 					$cid=$cat_row["cid"];
+					$cnum=$cat_row['no_of_images'];
 				}
 			}
 		}else echo "<script>alert('Catagory Not Available')</script>";
@@ -32,19 +33,20 @@ if(isset($_SESSION['userid'])){
 				$result_catagory_select = $con->query("UPDATE `image` SET `cid`=$cid WHERE `im_id`= $im_id");
 				if ($result_catagory_select){
 					unset($_SESSION['im_id']);
+					$cnum++;
+					$con->query("UPDATE `catagory` SET `no_of_images`='$cnum' WHERE `cid`='$cid'");
 					echo "<script>alert('Catagory Applied');location.href='index.php';</script>";
 				}else echo "<script>alert('Catagory Not Applied')</script>";
 			}
 		}
-
-		if(isset($_POST['catagory_create'])){
-			$cctitle = $_POST['cctitle'];
-			$ccdesc = $_POST['ccdesc'];
-			if(!empty($cctitle)){
-				$result_catagory_insert = $con->query("INSERT INTO `catagory`(`ctitle`, `cdesc`, `userid`) VALUES ('$cctitle','$ccdesc','$id')");
-				if ($result_catagory_insert) echo "<script>alert('Catagory Inserted')</script>";
-				else echo "<script>alert('Catagory Not Inserted')</script>";
-			}
+	}
+	if(isset($_POST['catagory_create'])){
+		$cctitle = $_POST['cctitle'];
+		$ccdesc = $_POST['ccdesc'];
+		if(!empty($cctitle)){
+			$result_catagory_insert = $con->query("INSERT INTO `catagory`(`ctitle`, `cdesc`, `userid`) VALUES ('$cctitle','$ccdesc','$id')");
+			if ($result_catagory_insert) echo "<script>alert('Catagory Inserted')</script>";
+			else echo "<script>alert('Catagory Not Inserted')</script>";
 		}
 	}
 }else unset($_SESSION['userid']);
@@ -59,7 +61,7 @@ if(isset($_SESSION['userid'])){
 </head>
 <header>
 	<div class="tittle">
-		PIXEL.com
+		<img src="logo.png">
 	</div>
 	<nav role="navigation">
 		<ul>
@@ -67,20 +69,20 @@ if(isset($_SESSION['userid'])){
 			<li><a href="explore.php">Explore</a></li>
 			<li><a href="#">Catagory</a>
 				<ul class="dropdown">
-					<li><a href="#">Photography</a></li>
-					<li><a href="#">Illastrations</a></li>
-					<li><a href="#">Clip-Art</a></li>
-					<li><a href="#">Other</a></li>
+					<li><a href="photography.php">Photography</a></li>
+					<li><a href="illustration.php">Illastrations</a></li>
+					<li><a href="clipart.php">Clip-Art</a></li>
+					<li><a href="other_cat.php">Other Catagories</a></li>
 				</ul>
 			</li>
-			<li><a href="#">About Us</a></li>
+			<li><a href="statistics.php">Users Data</a></li>
 			<li class="last">
 				<?php
 				if(!isset($_SESSION['userid']))echo "<a href='signup.php' class='Login'>Sign In/Sign Up</a>";
 				else {
 					echo "Welcome ".$username;
 					echo " <ul class='dropdown'>
-					<li><a href='#''>Profile</a></li>
+					<li><a href='profile.php'>Profile</a></li>
 					<li>Upload/Create Post</li>
 					<li><a href='#'>Add Balance</a></li>
 					<li><a href='logout.php'>Log Out</a></li>

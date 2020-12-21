@@ -70,7 +70,7 @@ if(isset($_SESSION['userid'])){
 </head>
 <header>
 	<div class="tittle">
-		PIXEL.com
+		<img src="logo.png">
 	</div>
 	<nav role="navigation">
 		<ul>
@@ -79,19 +79,19 @@ if(isset($_SESSION['userid'])){
 			<li><a href="#">Catagory</a>
 				<ul class="dropdown">
 					<li><a href="photography.php">Photography</a></li>
-					<li><a href="#">Illastrations</a></li>
-					<li><a href="#">Clip-Art</a></li>
-					<li><a href="#">Other</a></li>
+					<li><a href="illustration.php">Illastrations</a></li>
+					<li><a href="clipart.php">Clip-Art</a></li>
+					<li><a href="other_cat.php">Other Catagories</a></li>
 				</ul>
 			</li>
-			<li><a href="#">About Us</a></li>
+			<li><a href="statistics.php">Users Data</a></li>
 			<li class="last">
 				<?php
 				if(!isset($_SESSION['userid'])){echo "<a href='signup.php' class='Login'>Sign In/Sign Up</a>";echo "<script>alert('You haven't logged in')</script>";}
 				else {
 					echo "Welcome ".$username;
 					echo " <ul class='dropdown'>
-					<li><a href='#''>Profile</a></li>
+					<li><a href='profile.php''>Profile</a></li>
 					<li>Upload/Create Post</li>
 					<li><a href='#'>Add Balance</a></li>
 					<li><a href='logout.php'>Log Out</a></li>

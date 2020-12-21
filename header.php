@@ -21,6 +21,59 @@ if(isset($_SESSION['userid'])){
 	<title>Pixel</title>
 	<link rel="stylesheet" type="text/css" href="style1.css">
 	<script src="js.js"></script>
+	<style>
+		div.main{
+			width: 80%;
+			margin: 30px auto;
+			display: grid;
+			background-color: #ffe6e6;
+		}
+
+		div.below-main{
+			width: 80%;
+			margin: 20px auto;
+			text-align: center;
+			padding-top: : 5px;
+			padding-bottom: : 50px; 
+		}
+
+		div.gallery-display{
+			display: grid;
+			grid-template-columns: auto auto auto auto;
+			grid-gap: 10px;
+		}
+
+		div.gallery {
+			margin: 5px;
+			border: 1px solid #ccc;
+			float: left;
+			width: 49%;
+			padding: 1px;
+			display: grid;
+			background-color: red;
+		}
+
+		div.gallery:hover {
+			border: 1px solid #777;
+		}
+
+		div.gallery img {
+			width: 100%;
+			height: auto;
+		}
+
+		div.desc {
+			padding-top: 5px;
+			padding-bottom: 10px;
+			text-align: center;
+		}
+
+		div.title {
+			padding-top: 10px;
+			text-align: center;
+			color: dodgerblue;
+		}
+	</style>
 </head>
 <header>
 	<div class="tittle">
@@ -32,7 +85,7 @@ if(isset($_SESSION['userid'])){
 			<li class="active">Explore</li>
 				<li><a href="#">Catagory</a>
 					<ul class="dropdown">
-						<li><a href="#">Photography</a></li>
+						<li><a href="photography.php">Photography</a></li>
 						<li><a href="#">Illastrations</a></li>
 						<li><a href="#">Clip-Art</a></li>
 						<li><a href="#">Other</a></li>

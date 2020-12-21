@@ -29,7 +29,7 @@ if(isset($_POST['Submit'])){
 </head>
 <header>
 	<div class="tittle">
-		fuck PIXEL.com and i hate my life
+		<img src="logo.png">
 	</div>
 	<nav role="navigation">
 		<ul>
@@ -38,10 +38,10 @@ if(isset($_POST['Submit'])){
 
 				<li><a href="#">Catagory</a>
 					<ul class="dropdown">
-						<li><a href="#">Photography</a></li>
-						<li><a href="#">Illastrations</a></li>
-						<li><a href="#">Clip-Art</a></li>
-						<li><a href="#">Other</a></li>
+						<li><a href="photography.php">Photography</a></li>
+						<li><a href="illustration.php">Illastrations</a></li>
+						<li><a href="clipart.php">Clip-Art</a></li>
+						<li><a href="other_cat.php">Other Catagories</a></li>
 					</ul>
 				</li>
 				<li><a href="#">About Us</a></li>
